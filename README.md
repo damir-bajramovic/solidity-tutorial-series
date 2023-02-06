@@ -81,3 +81,4 @@ Also:
 - Scripts for verifying contracts on Etherscan
 - Scripts for running various contract functions for interacting on live-networks
 - Actually using an interface, instead of low-level calls in `Protocol` for interaction with the `EMB` token.
+- Adding tests that would cover different signature styles, which are covered by the `ECDSA` library in the `Protocol` contract, just in case.

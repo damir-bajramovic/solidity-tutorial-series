@@ -25,6 +25,10 @@ contract EMBToken is ERC20, Ownable {
 
     // External functions
 
+    /**
+     * Setter for the protocol variable, the caller of the mint function.
+     * @param _protocol Address of the Protocol contract that will check mint conditions for the minters.
+     */
     function setProtocol(address _protocol) external onlyOwner {
         // Settable to address zero, so that minting can be closed.
         address oldProtocol = protocol;
@@ -32,6 +36,11 @@ contract EMBToken is ERC20, Ownable {
         emit ProtocolChanged(oldProtocol, protocol);
     }
 
+    /**
+     * Distribute tokens to an address.
+     * @param account Recipient address of the token.
+     * @param amount Amount of token to receive.
+     */
     function mint(address account, uint256 amount) external {
         require(_msgSender() == protocol, "Only protocol");
         _mint(account, amount);

@@ -72,6 +72,7 @@ contract Protocol {
     /// @param signature An array of bytes representing a signature created by the
     /// `Protocol.mintSigner` address
     /// @param _to The address the minted EMB should be sent to
+    /// @param _amount The amount of EMB to be minted
     function signatureMint(
         bytes memory signature,
         address _to,

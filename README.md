@@ -37,6 +37,11 @@ To test the contracts, run:
 npm run test
 ```
 
+To test the contracts on the local network, run:
+```shell
+npm run test --network localhost
+```
+
 For gas report, run:
 ```shell
 npm run gas-reporter

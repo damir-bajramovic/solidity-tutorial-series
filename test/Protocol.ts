@@ -131,7 +131,7 @@ describe("Protocol", function () {
         const { protocol, embToken, mintSigner } = await loadFixture(prepareContractsFixture);
 
         expect(await protocol.mintSigner()).to.equal(mintSigner.address);
-        expect(await protocol.EMBToken()).to.equal(embToken.address);
+        expect(await protocol.embToken()).to.equal(embToken.address);
       });
 
       it("Should set the domain separator properly", async () => {
@@ -139,7 +139,7 @@ describe("Protocol", function () {
 
         const domainHash = ethers.utils._TypedDataEncoder.hashDomain(PROTOCOL_DOMAIN);
 
-        expect(await protocol.EIP712_DOMAIN()).to.equal(domainHash);
+        expect(await protocol.eip712DomainSeparator()).to.equal(domainHash);
       });
 
       it("Should fail to deploy if the mintSigner address is zero", async () => {

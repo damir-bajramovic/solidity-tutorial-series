@@ -47,6 +47,16 @@ For code coverage, run:
 npm run coverage
 ```
 
+For deploying on local hardhat network, run a hardhat node in one terminal:
+```shell
+npx hardhat node
+```
+
+And in the other terminal, run:
+```shell
+npx hardhat run ./scripts/deploy.ts --network localhost
+```
+
 ## Development
 
 For linting the smart contracts using `solhint`, run:
@@ -64,3 +74,11 @@ Also, it is debatable should the signature parameteres, `v`, `r`, `s` be passed 
 Low-level calls, like `address.call(...)` could be avoided by using an interface, but the constraint was set not to import additional contracts.
 
 The `EMB` token is `Ownable` just to save some time and not write the functions that we need to use ourselves. The `EMB` token is the control center now.
+
+It would be nice to add linting and formatting for TypeScript files.
+
+Also:
+- Scripts for verifying contracts on Etherscan
+- Scripts for running various contract functions for interacting on live-networks
+- Actually using an interface, instead of low-level calls in `Protocol` for interaction with the `EMB` token.
+- Adding tests that would cover different signature styles, which are covered by the `ECDSA` library in the `Protocol` contract, just in case.

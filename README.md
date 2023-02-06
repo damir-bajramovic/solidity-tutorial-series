@@ -80,4 +80,4 @@ It would be nice to add linting and formatting for TypeScript files.
 Also:
 - Scripts for verifying contracts on Etherscan
 - Scripts for running various contract functions for interacting on live-networks
-- 
+- Actually using an interface, instead of low-level calls in `Protocol` for interaction with the `EMB` token.

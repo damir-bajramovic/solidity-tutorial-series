@@ -98,6 +98,9 @@ contract Protocol {
             "Signature error"
         );
 
+        // No replay attacks
+        alreadyMinted[_to] = true;
+
         // NOTE: No contract importing, that's why it's done this way.
         // Call the mint function
         // solhint-disable-next-line avoid-low-level-calls
@@ -105,9 +108,6 @@ contract Protocol {
             abi.encodeWithSignature("mint(address,uint256)", _to, _amount)
         );
         require(sent, "EmbToken contract call failed");
-
-        // No replay attacks
-        alreadyMinted[_to] = true;
 
         // Emit event
         emit SignatureMint(msg.sender, _to, _amount);

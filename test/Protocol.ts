@@ -1,22 +1,13 @@
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { BigNumber, constants, TypedDataDomain } from "ethers";
+import { constants, TypedDataDomain } from "ethers";
 import { _TypedDataEncoder } from "ethers/lib/utils";
-
-const MintDataType = {
-  Mint: [
-    { name: "minter", type: "address" },
-    { name: "amount", type: "uint256" },
-  ]
-};
-
-type MintArgs = {
-  minter: string,
-  amount: BigNumber
-}
+import { MintDataType } from "../helpers/types/eip712";
+import { MintArgs } from "../helpers/types";
 
 const OWNABLE_ERROR_MESSAGE = "Ownable: caller is not the owner";
+const PROTOCOL_ERROR_MESSAGE = "Only protocol";
 
 describe("Protocol", function () {
   async function prepareContractsFixture() {
@@ -229,7 +220,7 @@ describe("Protocol", function () {
         const { embToken, owner } = await loadFixture(prepareContractsFixture);
 
         await expect(embToken.mint(owner.address, constants.WeiPerEther))
-          .to.be.revertedWith("Only protocol");
+          .to.be.revertedWith(PROTOCOL_ERROR_MESSAGE);
       });
 
       it("Should fail calling mint in EMBToken contract when calling from recipient", async () => {
@@ -238,7 +229,7 @@ describe("Protocol", function () {
         const embTokenRecipient = embToken.connect(recipient);
 
         await expect(embTokenRecipient.mint(recipient.address, constants.WeiPerEther))
-          .to.be.revertedWith("Only protocol");
+          .to.be.revertedWith(PROTOCOL_ERROR_MESSAGE);
       });
 
       it("Should change the totalSupply by the correct amount", async () => {
